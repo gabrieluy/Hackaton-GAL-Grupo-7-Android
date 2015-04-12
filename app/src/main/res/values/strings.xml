@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Mercadogistics</string>
+
+    <string name="escanear">Escanear</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_escanear">Escanear</string>
+    <string name="listitem_cliente">CLIENTE: </string>
+    <string name="listitem_direccion">DIRECCION: </string>
+    <string name="listitem_precio">PRECIO: </string>
+    <string name="listitem_contacto">CONTACTO: </string>
+    <string name="listitem_comentarios">COMENTARIOS: </string>
+    <string name="listitem_estado">ESTADO: </string>
+</resources>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <TextView
+        android:id="@+id/nombre_item_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bluelight"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Nombre del item"
+/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/nombre_usuario_label"
+        android:textColor="@color/abc_primary_text_material_light"
+        android:paddingLeft="5sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/listitem_cliente"/>
+    <TextView
+        android:id="@+id/nombre_usuario_text_view"
+        android:paddingLeft="5sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Nombre"/>
+
+    <TextView
+        android:id="@+id/apellido_usuario_text_view"
+        android:paddingLeft="5sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Apellido"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/direccion_label"
+            android:textColor="@color/abc_primary_text_material_light"
+            android:paddingLeft="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/listitem_direccion"/>
+        <TextView
+            android:id="@+id/direccion_text_view"
+            android:paddingLeft="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Direccion"/>
+        <TextView
+            android:id="@+id/ciudad_text_view"
+            android:paddingLeft="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Ciudad"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/contacto_label"
+            android:textColor="@color/abc_primary_text_material_light"
+            android:paddingLeft="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/listitem_contacto"/>
+        <TextView
+            android:id="@+id/telefono_text_view"
+            android:paddingLeft="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="099858695"/>
+        <TextView
+            android:id="@+id/email_text_view"
+            android:paddingLeft="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="unadireccion@gmail.com"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/comentarios_label"
+            android:textColor="@color/abc_primary_text_material_light"
+            android:paddingLeft="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/listitem_comentarios"/>
+        <TextView
+            android:id="@+id/comentarios_text_view"
+            android:paddingLeft="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="DE 14 A 21"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/estado_label"
+            android:textColor="@color/abc_primary_text_material_light"
+            android:paddingLeft="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/listitem_estado"/>
+
+        <TextView
+            android:id="@+id/estado_text_view"
+            android:paddingLeft="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="delivered"/>
+        <TextView
+            android:id="@+id/precio_label"
+            android:textColor="@color/abc_primary_text_material_light"
+            android:paddingLeft="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/listitem_precio"/>
+        <TextView
+            android:id="@+id/precio_text_view"
+            android:textColor="@color/greendark"
+            android:paddingLeft="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="10000"/>
+        <TextView
+            android:id="@+id/moneda_text_view"
+            android:textColor="@color/greendark"
+            android:paddingLeft="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="UYO"/>
+
+
+    </LinearLayout>
+</LinearLayout>
