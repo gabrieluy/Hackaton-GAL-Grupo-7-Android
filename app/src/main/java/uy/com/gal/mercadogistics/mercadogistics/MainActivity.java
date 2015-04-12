@@ -7,6 +7,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
@@ -15,9 +16,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
@@ -31,14 +31,12 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends ActionBarActivity implements  OnClickListener {
+
+    private ListView lstListado;
     private ProgressDialog pDialog;
     private FloatingActionButton scanBtn;
     private List<Envio> listaEnvios = new ArrayList<Envio>();
@@ -47,35 +45,44 @@ public class MainActivity extends ActionBarActivity implements  OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        lstListado = (ListView) findViewById(R.id.orders_list);
         scanBtn = (FloatingActionButton) findViewById(R.id.scan_button);
         scanBtn.setOnClickListener(this);
         pDialog = new ProgressDialog(this);
         pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pDialog.setCancelable(false);
+        lstListado.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> list, View view, int pos,
+                                    long id) {
+                onEnvioSeleccionado((Envio) lstListado
+                        .getAdapter().getItem(pos));
+            }
+        });
         TareaWSGetEnviosPendientes tareaGetEnvios = new TareaWSGetEnviosPendientes();
         tareaGetEnvios.execute();
     }
 
+    // Al seleccionar un evento
+    public void onEnvioSeleccionado(Envio e) {
+
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse("http://maps.google.com/maps?daddr="+e.getDireccion()));
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        //int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        //if (id == R.id.menu_scan) {
-        //    IntentIntegrator scanIntegrator = new IntentIntegrator(this);
-        //    scanIntegrator.initiateScan();
-        // }
-
+            //No se van a utilizar botones en el action bar
         return super.onOptionsItemSelected(item);
     }
 
@@ -125,18 +132,6 @@ public class MainActivity extends ActionBarActivity implements  OnClickListener 
                 HttpResponse resp = httpClient.execute(put);
                 String respStr = EntityUtils.toString(resp.getEntity());
                 JSONObject respJSON = new JSONObject(respStr);
-                // Obtengo los datos de la respuesta Json
-                Log.e("LOGEO-MAIN respuesta cambio estado", respStr);
-              /*  boolean error = respJSON.getBoolean("Error");
-                String mensajeError = respJSON.getString("MensajeError");
-                boolean valor = respJSON.getBoolean("Valor");
-                if (!error) {
-                    Globales.USUARIO_ACTIVO.setConsultarLista_X(valor);
-                } else {
-                    Log.i("LOGEO-MAIN", "Error al obtener acceso ejecucion "
-                            + mensajeError);
-                    resul = false;
-                }*/
             } catch (Exception ex) {
                 Log.e("LOGEO-MAIN", "Exception ",ex);
                 resul = false;
@@ -152,11 +147,6 @@ public class MainActivity extends ActionBarActivity implements  OnClickListener 
         @Override
         protected void onPostExecute(Boolean result) {
             if (result) {
-                try {//demora un poco para que al actualizar la lista se reflejen los cambios
-                    Thread.sleep(30000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 TareaWSGetEnviosPendientes tareaGetEnvios = new TareaWSGetEnviosPendientes();
                 tareaGetEnvios.execute();
             } else {
@@ -190,20 +180,21 @@ public class MainActivity extends ActionBarActivity implements  OnClickListener 
                 if (results.length() > 0)// en caso de recibir una respuesta vacia
                 {
                     listaEnvios.clear();
-                    //para todos los results me quedo solo con los envios
+                    //para todos los results me quedo solo con los que tienen envios
                     for (int i = 0; i < results.length(); i++) {
                         JSONObject ordenJSON = results.getJSONObject(i);
                         JSONObject envioJSON = ordenJSON.getJSONObject("shipping");
                         String idEnvio = envioJSON.getString("id");
                         if(idEnvio != "null")
                         {
+                            //Se separan los datos que interesan
                             JSONArray itemsJSON = ordenJSON.getJSONArray("order_items");
                             JSONObject itemJSON = itemsJSON.getJSONObject(0).getJSONObject("item");
                             JSONObject compradorJSON = ordenJSON.getJSONObject("buyer");
                             JSONObject telefonoJSON = compradorJSON.getJSONObject("phone");
                             JSONObject direccionJSON = envioJSON.getJSONObject("receiver_address");
                             JSONObject ciudadJSON = direccionJSON.getJSONObject("state");
-
+                            //Se crean los objetos perinentes
                             Item item = new Item(
                                     itemJSON.getString("id"),
                                     itemJSON.getString("title"));
