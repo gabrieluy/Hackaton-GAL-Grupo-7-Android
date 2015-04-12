@@ -54,6 +54,13 @@ public class AdaptadorEnvios  extends ArrayAdapter<Envio> {
         holder.precio.setText(Integer.toString(datos.get(position).getPrecioTotal()));
         holder.moneda.setText(datos.get(position).getMoneda());
         holder.ciudad.setText(datos.get(position).getCiudad());
+        if(datos.get(position).getComentarios() == "null"){
+            holder.comentarios.setVisibility(View.GONE);
+            holder.lblComentarios.setVisibility(View.GONE);
+        }else{
+            holder.comentarios.setVisibility(View.VISIBLE);
+            holder.lblComentarios.setVisibility(View.VISIBLE);
+        }
         holder.comentarios.setText(datos.get(position).getComentarios());
         holder.estado.setText(Traducir(datos.get(position).getEstado()));
         holder.email.setText(datos.get(position).getComprador().getEmail());
@@ -68,6 +75,7 @@ public class AdaptadorEnvios  extends ArrayAdapter<Envio> {
         holder.precio = (TextView) item.findViewById(R.id.precio_text_view);
         holder.moneda = (TextView) item.findViewById(R.id.moneda_text_view);
         holder.ciudad = (TextView) item.findViewById(R.id.ciudad_text_view);
+        holder.lblComentarios = (TextView) item.findViewById(R.id.comentarios_label);
         holder.comentarios = (TextView) item.findViewById(R.id.comentarios_text_view);
         holder.estado = (TextView) item.findViewById(R.id.estado_text_view);
         holder.email = (TextView) item.findViewById(R.id.email_text_view);
@@ -82,6 +90,7 @@ public class AdaptadorEnvios  extends ArrayAdapter<Envio> {
         TextView precio;
         TextView moneda;
         TextView ciudad;
+        TextView lblComentarios;
         TextView comentarios;
         TextView email;
         TextView estado;
